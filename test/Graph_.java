@@ -100,13 +100,13 @@ public class Graph_ {
     }
 
     @Test
-    public void should_return_an_ordered_list_of_edges_without_self_loops() throws Exception {
+    public void should_return_an_ordered_list_of_edges() throws Exception {
         Graph graph = new UndirectedGraph(3);
         graph.addEdge(1, 2, 0.5);
         graph.addEdge(0, 2, 1.0);
         graph.addEdge(0, 1, 1.0);
         graph.addEdge(0, 0, 0.0);
-        List<Edge> expectedList = Arrays.asList(new Edge(1, 2, 0.5), new Edge(0, 1, 1.0), new Edge(0, 2, 1.0));
+        List<Edge> expectedList = Arrays.asList(new Edge(0, 0, 0.0), new Edge(1, 2, 0.5), new Edge(0, 1, 1.0), new Edge(0, 2, 1.0));
         assertThat(graph.edges(), is(expectedList));
     }
 

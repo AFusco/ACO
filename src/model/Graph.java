@@ -4,7 +4,7 @@ import java.util.*;
 
 public abstract class Graph {
     protected final int amountOfVertex;
-    protected final Set<Edge> edges;
+    protected final SortedSet<Edge> edges;
 
     public Graph(int size) {
         if (size < 0)
@@ -27,7 +27,7 @@ public abstract class Graph {
 
     public List<Edge> edges() {
         List<Edge> edges = new ArrayList<>();
-        for (Edge edge : this.edges) if (!edge.isLoop()) edges.add(edge);
+        for (Edge edge : this.edges) edges.add(edge);
         return edges;
     }
 
