@@ -28,7 +28,6 @@ public abstract class Graph {
     public List<Edge> edges() {
         List<Edge> edges = new ArrayList<>();
         for (Edge edge : this.edges) if (!edge.isLoop()) edges.add(edge);
-        Collections.sort(edges);
         return edges;
     }
 
