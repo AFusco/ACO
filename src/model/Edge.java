@@ -1,5 +1,7 @@
 package model;
 
+import static java.lang.Double.compare;
+import static java.lang.Integer.compare;
 import static java.lang.Math.min;
 import static java.lang.Math.max;
 
@@ -52,7 +54,12 @@ public class Edge implements Comparable<Edge> {
 
     @Override
     public int compareTo(Edge edge) {
-        return Double.compare(weight, edge.weight);
+        if (this.equals(edge)) return 0;
+        return compare(weight, edge.weight) != 0 ? compare(weight, edge.weight) : compareVertices(edge);
+    }
+
+    private int compareVertices(Edge edge) {
+        return compare(lowVertex, edge.lowVertex) != 0 ? compare(lowVertex, edge.lowVertex) : compare(highVertex, edge.highVertex);
     }
 
 }

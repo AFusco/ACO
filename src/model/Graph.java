@@ -4,13 +4,13 @@ import java.util.*;
 
 public abstract class Graph {
     protected final int amountOfVertex;
-    protected final Map<Integer, Edge> edges;
+    protected final Set<Edge> edges;
 
     public Graph(int size) {
         if (size < 0)
             throw new IllegalArgumentException("size(" + size + "): the size of a graph must be greater or equal than 0");
         this.amountOfVertex = size;
-        edges = new HashMap<>();
+        edges = new TreeSet<>();
     }
 
     public abstract boolean addEdge(int vertex1, int vertex2, double weight);
@@ -27,10 +27,7 @@ public abstract class Graph {
 
     public List<Edge> edges() {
         List<Edge> edges = new ArrayList<>();
-        for (Integer key : this.edges.keySet()) {
-            Edge edge = this.edges.get(key);
-            if (!edge.isLoop()) edges.add(edge);
-        }
+        for (Edge edge : this.edges) if (!edge.isLoop()) edges.add(edge);
         Collections.sort(edges);
         return edges;
     }
@@ -58,7 +55,7 @@ public abstract class Graph {
 
     public double totalWeight() {
         int totalWeight = 0;
-        for (Integer key : edges.keySet()) totalWeight += edges.get(key).weight();
+        for (Edge edge : edges) totalWeight += edge.weight();
         return totalWeight;
     }
 }

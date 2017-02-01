@@ -11,9 +11,7 @@ public class UndirectedGraph extends Graph {
         checkBounds(vertex1);
         checkBounds(vertex2);
         Edge edge = new Edge(vertex1, vertex2, weight);
-        if (edges.containsKey(edge.hashCode())) return false;
-        edges.put(edge.hashCode(), edge);
-        return true;
+        return edges.add(edge);
     }
 
     @Override
