@@ -46,9 +46,9 @@ public class Edge_ {
     }
 
     @Test
-    public void edges_with_distinct_weight_and_same_vertices_are_equal() throws Exception {
+    public void edges_with_distinct_weight_and_same_vertices_are_not_equal() throws Exception {
         int vertex1 = 1, vertex2 = 2;
-        assertThat(new Edge(vertex1, vertex2, 9.0), is(new Edge(vertex1, vertex2, 12.0)));
+        assertThat(new Edge(vertex1, vertex2, 9.0), is(not(new Edge(vertex1, vertex2, 12.0))));
     }
 
     @Test

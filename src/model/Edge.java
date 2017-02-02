@@ -44,17 +44,15 @@ public class Edge implements Comparable<Edge> {
     @Override
     public boolean equals(Object obj) {
         Edge edge = (Edge) obj;
+        return hasTheSameVertices(edge) && weight == edge.weight;
+    }
+
+    public boolean hasTheSameVertices(Edge edge) {
         return lowVertex == edge.lowVertex && highVertex == edge.highVertex;
     }
 
     @Override
-    public int hashCode() {
-        return 31 * lowVertex + highVertex;
-    }
-
-    @Override
     public int compareTo(Edge edge) {
-        if (this.equals(edge)) return 0;
         return compare(weight, edge.weight) != 0 ? compare(weight, edge.weight) : compareVertices(edge);
     }
 

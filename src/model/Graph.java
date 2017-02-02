@@ -2,20 +2,31 @@ package model;
 
 import java.util.*;
 
-public abstract class Graph {
-    protected final int amountOfVertex;
-    protected final SortedSet<Edge> edges;
+public class Graph {
+    private final int amountOfVertex;
+    private final SortedSet<Edge> edges;
 
     public Graph(int size) {
         if (size < 0)
             throw new IllegalArgumentException("size(" + size + "): the size of a graph must be greater or equal than 0");
         this.amountOfVertex = size;
-        edges = new TreeSet<>();
+        edges = new TreeSet<>((edge1, edge2) -> {
+            if (edge1.hasTheSameVertices(edge2)) return 0;
+            return edge1.compareTo(edge2);
+        });
     }
 
-    public abstract boolean addEdge(int vertex1, int vertex2, double weight);
+    public boolean addEdge(int vertex1, int vertex2, double weight) {
+        checkBounds(vertex1);
+        checkBounds(vertex2);
+        Edge edge = new Edge(vertex1, vertex2, weight);
+        return edges.add(edge);
+    }
 
-    public abstract boolean isConnected();
+    public boolean isConnected() {
+        if (isEmpty()) return false;
+        return true; //--no funciona así de simple!!!
+    }
 
     public int amountOfVertex() {
         return amountOfVertex;
@@ -31,7 +42,7 @@ public abstract class Graph {
         return edges;
     }
 
-    protected void checkBounds(int vertex) {
+    private void checkBounds(int vertex) {
         if (isEmpty())
             throw new IndexOutOfBoundsException("vertex(" + vertex + "): is out of range {-}");
         if (!containsVertex(vertex))
@@ -45,6 +56,7 @@ public abstract class Graph {
     public boolean isEmpty() {
         return amountOfVertex == 0;
     }
+
 
 
     @Override
