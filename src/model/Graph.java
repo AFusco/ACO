@@ -1,5 +1,7 @@
 package model;
 
+import model.kruskal.Kruskal;
+
 import java.util.*;
 
 public class Graph {
@@ -57,7 +59,9 @@ public class Graph {
         return amountOfVertex == 0;
     }
 
-
+    public List<Edge> getMinimumSpanningTree(){
+        return Kruskal.minimumSpanningTree(this);
+    }
 
     @Override
     public String toString() {
