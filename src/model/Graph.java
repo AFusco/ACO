@@ -7,6 +7,7 @@ import java.util.*;
 public class Graph {
     private final int amountOfVertex;
     private final SortedSet<Edge> edges;
+    private List<Edge> mst = null;
 
     public Graph(int size) {
         if (size < 0)
@@ -22,12 +23,13 @@ public class Graph {
         checkBounds(vertex1);
         checkBounds(vertex2);
         Edge edge = new Edge(vertex1, vertex2, weight);
+        mst = null;
         return edges.add(edge);
     }
 
     public boolean isConnected() {
         if (isEmpty()) return false;
-        return true; //--no funciona así de simple!!!
+        return getMinimumSpanningTree().size() == amountOfVertex - 1;
     }
 
     public int amountOfVertex() {
@@ -39,7 +41,7 @@ public class Graph {
     }
 
     public List<Edge> edges() {
-        List<Edge> edges = new ArrayList<>();
+        List<Edge> edges = new ArrayList<>(this.edges.size());
         for (Edge edge : this.edges) edges.add(edge);
         return edges;
     }
@@ -60,7 +62,9 @@ public class Graph {
     }
 
     public List<Edge> getMinimumSpanningTree(){
-        return Kruskal.minimumSpanningTree(this);
+        if (mst == null)
+            mst = Kruskal.minimumSpanningTree(this);
+        return mst;
     }
 
     @Override
