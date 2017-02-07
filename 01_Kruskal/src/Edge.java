@@ -1,5 +1,3 @@
-package model;
-
 import static java.lang.Double.compare;
 import static java.lang.Integer.compare;
 import static java.lang.Math.min;
@@ -15,6 +13,8 @@ public class Edge implements Comparable<Edge> {
             throw new IllegalArgumentException("vertex(" + vertex1 + "): Vertices must not be negative");
         if (vertex2 < 0)
             throw new IllegalArgumentException("vertex(" + vertex2 + "): Vertices must not be negative");
+        if (weight < 0)
+            throw new IllegalArgumentException("weight(" + weight + "): Weight must not be negative");
         this.lowVertex  = min(vertex1, vertex2);
         this.highVertex = max(vertex1, vertex2);
         this.weight = weight;
