@@ -1,9 +1,21 @@
+/**
+ * @author Alessandro Fusco
+ * @author Eduardo Ortega
+ *
+ * This class implements the DisjointSet data structure, used to solve the
+ * connected components problem (aka Union-Find)
+ */
 public class DisjointSets {
 
     private final int[] sets;
     private final int EMPTY = Integer.MAX_VALUE;
     private int amountOfSets;
 
+
+    /**
+     * Initialize a Disjoint Set data structure with amountOfSets disjoint components.
+     * @param amountOfSets The amount of initial components
+     */
     public DisjointSets(int amountOfSets) {
         this.amountOfSets = amountOfSets;
         sets = new int[amountOfSets];
@@ -12,29 +24,34 @@ public class DisjointSets {
         }
     }
 
+    /**
+     * @return The amount of connected components
+     */
     public int amountOfSets() {
         return amountOfSets;
     }
 
-    private void checkBounds(int vertex) {
-        if (vertex < 0 || vertex >= sets.length)
-            throw new IllegalArgumentException("vertex(" + vertex + "): is out of range {0.." + (sets.length - 1) + "}");
-    }
 
+    /**
+     * Check if vertex1 and vertex2 are connected.
+     * @param vertex1
+     * @param vertex2
+     * @return True if vertex1 and vertex2 are part of the same component
+     */
     public boolean areConnected(int vertex1, int vertex2) {
         checkBounds(vertex1);
         checkBounds(vertex2);
         return rootOfVertex(vertex1) == rootOfVertex(vertex2);
     }
 
-    private int rootOfVertex(int vertex) {
-        return isRoot(vertex) ? vertex : rootOfVertex(sets[vertex]);
-    }
-
-    private boolean isRoot(int vertex) {
-        return sets[vertex] == EMPTY || sets[vertex] < 0;
-    }
-
+    /**
+     * Perform a join operation.
+     * After connectSets is called, unless an exception is thrown,
+     * the two vertices are assured to be connected.
+     * @param vertex1
+     * @param vertex2
+     * @return False if the two vertices were already connected. Otherwise true.
+     */
     public boolean connectSets(int vertex1, int vertex2) {
         // Bound check done by areConnected()
         if (areConnected(vertex1, vertex2))
@@ -50,6 +67,14 @@ public class DisjointSets {
         }
 
         return true;
+    }
+
+    private boolean isRoot(int vertex) {
+        return sets[vertex] == EMPTY || sets[vertex] < 0;
+    }
+
+    private int rootOfVertex(int vertex) {
+        return isRoot(vertex) ? vertex : rootOfVertex(sets[vertex]);
     }
 
     private void joinSetsOfSameSize(int root1, int vertex2) {
@@ -71,6 +96,10 @@ public class DisjointSets {
 
     }
 
+    private void checkBounds(int vertex) {
+        if (vertex < 0 || vertex >= sets.length)
+            throw new IllegalArgumentException("vertex(" + vertex + "): is out of range {0.." + (sets.length - 1) + "}");
+    }
     @Override
     public String toString() {
         String index = "  ";
