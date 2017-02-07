@@ -1,3 +1,12 @@
+/**
+ * @author Alessandro Fusco
+ * @author Eduardo Ortega
+ *
+ * This class aims to benchmark the implementation of the Kruskal algorithm,
+ * by timing it's execution time when increasing both the number of vertices
+ * (size of the graph) and number of edges (sparcity of the graph)
+ */
+
 import java.util.List;
 import java.util.Random;
 
@@ -16,17 +25,22 @@ public class Main {
         }
 
         benchmark(trials, 5, 1024);
-
     }
 
-
-    private static void benchmark(int trials, int edgesCount, int initialSize) {
+    /**
+     * Benchmarking method
+     *
+     * @param trials How many times you want to double the number of vertices.
+     * @param edgeIterations How many times do you want to add g.amountOfVertex() edges.
+     * @param initialSize The number of vertices
+     */
+    private static void benchmark(int trials, int edgeIterations, int initialSize) {
         for (int i = 1; i <= trials; i++) {
 
             int graphSize = initialSize << i;
 
             System.out.println(i + ") Graph with " + graphSize + " vertices");
-            for (int j = 1; j <= edgesCount; j++) {
+            for (int j = 1; j <= edgeIterations; j++) {
 
                 int edges = graphSize * j;
                 Graph g = new Graph(graphSize, edges, r);
@@ -37,7 +51,6 @@ public class Main {
             System.out.println();
         }
     }
-
 
     /**
      * Return time of MST calculation in seconds.
@@ -51,5 +64,4 @@ public class Main {
 
         return duration;
     }
-
 }
