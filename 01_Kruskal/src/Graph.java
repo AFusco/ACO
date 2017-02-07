@@ -1,5 +1,13 @@
 import java.util.*;
 
+/**
+ * @author Alessandro Fusco
+ * @author Eduardo Ortega
+ *
+ * Implementation of a weighted undirected graph, to be exclusively used
+ * for the Kruskal algorithm, as it does not keep an adjacency list but only
+ * a sorted set of edges.
+ */
 public class Graph {
     private final int amountOfVertex;
     private final SortedSet<Edge> edges;

@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Random;
+
 /**
  * @author Alessandro Fusco
  * @author Eduardo Ortega
@@ -6,10 +9,6 @@
  * by timing it's execution time when increasing both the number of vertices
  * (size of the graph) and number of edges (sparcity of the graph)
  */
-
-import java.util.List;
-import java.util.Random;
-
 public class Main {
 
     final static Random r = new Random(1234);

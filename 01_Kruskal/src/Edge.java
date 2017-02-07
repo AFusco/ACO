@@ -3,7 +3,6 @@ import static java.lang.Integer.compare;
 import static java.lang.Math.min;
 import static java.lang.Math.max;
 
-
 /**
  * @author Alessandro Fusco
  * @author Eduardo Ortega

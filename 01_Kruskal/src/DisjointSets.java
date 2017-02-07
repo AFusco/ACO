@@ -100,6 +100,7 @@ public class DisjointSets {
         if (vertex < 0 || vertex >= sets.length)
             throw new IllegalArgumentException("vertex(" + vertex + "): is out of range {0.." + (sets.length - 1) + "}");
     }
+
     @Override
     public String toString() {
         String index = "  ";
